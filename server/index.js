@@ -32,14 +32,14 @@ app.get('/pokemon', (req, res) => {
                 if (!el.name.match(regex)) return false
                 if (req.query.minHp && parseInt(req.query.minHp) > el.base.HP) return false
                 if (req.query.maxHp && parseInt(req.query.maxHp) < el.base.HP) return false
-                if (req.query.maxAttack && parseInt(req.query.maxAttack) > el.base.Attack) return false
+                if (req.query.minAttack && parseInt(req.query.minAttack) > el.base.Attack) return false
                 if (req.query.maxAttack && parseInt(req.query.maxAttack) < el.base.Attack) return false
-                if (req.query.maxDefense && parseInt(req.query.maxDefense) > el.base.Defense)
+                if (req.query.minDefense && parseInt(req.query.minDefense) > el.base.Defense)
                     return false
                 if (req.query.maxDefense && parseInt(req.query.maxDefense) < el.base.Defense)
                     return false
-                if (req.query.speed && parseInt(req.query.speed) > el.base.Speed) return false
-                if (req.query.speed && parseInt(req.query.speed) < el.base.Speed) return false
+                if (req.query.minSpeed && parseInt(req.query.minSpeed) > el.base.Speed) return false
+                if (req.query.maxSpeed && parseInt(req.query.maxSpeed) < el.base.Speed) return false
                 return true
             })
             .map(el => {
