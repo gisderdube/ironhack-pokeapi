@@ -53,7 +53,12 @@ class Application extends React.Component {
     }
 
     _changePicture(index) {
-        console.log('HELLO', index)
+        this.setState({
+            cards: this.state.cards.map((card, i) => {
+                if (i !== index) return card
+                else return { ...card, img: 'https://picsum.photos/700/700' }
+            }),
+        })
     }
 }
 
