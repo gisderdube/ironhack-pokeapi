@@ -4,8 +4,13 @@ const cors = require('cors')
 const path = require('path')
 const pokemon = require('./data/pokemon.json')
 
+const base =
+    process.env.NODE_ENV === 'production'
+        ? 'https://ironhack-pokeapi.herokuapp.com'
+        : 'http://localhost:3000'
+
 const detailedPokemon = pokemon.map(el => {
-    return { ...el, picture: `http://localhost:3000/img/${el.id}${el.ename}.png` }
+    return { ...el, picture: `${base}img/${el.id}${el.ename}.png` }
 })
 
 const app = express()
@@ -28,4 +33,4 @@ app.get('/pokemon/:id', (req, res) => {
     res.send(matchingPokemon)
 })
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)

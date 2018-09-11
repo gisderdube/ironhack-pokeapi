@@ -13,7 +13,7 @@ class Application extends React.Component {
 
     componentDidMount() {
         axios
-            .get('https://pokeapi.co/api/v2/pokemon/')
+            .get('http://localhost:3000/pokemon/')
             .then(result => {
                 console.log(result)
             })
