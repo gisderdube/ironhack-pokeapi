@@ -20,8 +20,10 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, './public')))
 
 app.get('/pokemon', (req, res) => {
+    const regex = req.query.name ? new RegExp(`.*${req.query.name}.*`, 'i') : /.*/
+
     res.send(
-        detailedPokemon.map((el, index) => {
+        detailedPokemon.filter(el => el.name.match(regex)).map((el, index) => {
             return { name: el.ename, picture: el.picture, id: index }
         })
     )
