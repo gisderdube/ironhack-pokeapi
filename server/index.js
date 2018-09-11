@@ -29,7 +29,6 @@ app.get('/pokemon', (req, res) => {
 
 app.get('/pokemon/:id', (req, res) => {
     const matchingPokemon = detailedPokemon.find((el, index) => index === parseInt(req.params.id))
-    console.log(matchingPokemon)
     res.send(matchingPokemon)
 })
 

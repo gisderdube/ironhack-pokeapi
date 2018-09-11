@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
 const Card = ({ pokemon, catchPokemon }) => {
-    console.log(pokemon)
     return (
-        <div className="card">
+        <div className={`card ${pokemon.jname ? 'caught' : ''}`}>
             <img src={pokemon.picture} alt="" />
-            <h4 className="name">{pokemon.name || pokemon.ename}</h4>
+            <h4 className="name">{pokemon.name}</h4>
             {pokemon.jname ? (
                 <span>{pokemon.jname}</span>
             ) : (
