@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Card from './Card'
+import Search from './Search'
 
 class Application extends React.Component {
     constructor(props) {
@@ -9,9 +10,12 @@ class Application extends React.Component {
         this.state = {
             loading: true,
             pokemon: [],
+            search: '',
         }
 
         this._catchPokemon = this._catchPokemon.bind(this)
+        this._searchPokemon = this._searchPokemon.bind(this)
+        this._handleSearchChange = this._handleSearchChange.bind(this)
     }
 
     componentDidMount() {
@@ -38,9 +42,31 @@ class Application extends React.Component {
         return (
             <div className="container">
                 <h1>Pokemon</h1>
+                <Search
+                    search={this.state.search}
+                    handleSearchChange={this._handleSearchChange}
+                    searchPokemon={this._searchPokemon}
+                />
                 <div className="poke-flex">{mappedPokemon}</div>
             </div>
         )
+    }
+
+    _searchPokemon(event) {
+        event.preventDefault()
+        axios
+            .get(`https://ironhack-pokeapi.herokuapp.com/pokemon?name=${this.state.search}`)
+            .then(({ data }) => {
+                this.setState({
+                    pokemon: data,
+                })
+            })
+    }
+
+    _handleSearchChange(event) {
+        this.setState({
+            search: event.target.value,
+        })
     }
 
     _catchPokemon(id) {
