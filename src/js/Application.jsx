@@ -1,10 +1,17 @@
 import React from 'react'
+import Card from './Card'
 
 class Application extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {}
+    }
+
     render() {
         return (
-            <div className="application">
-                <h1>Our first React Component, which is in another file!</h1>
+            <div className="container">
+                <Card img='https://picsum.photos/300/300' heading='Declarative' caption='Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.' />
             </div>
         )
     }

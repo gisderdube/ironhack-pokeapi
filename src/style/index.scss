@@ -1,7 +1,2 @@
-body {
-    border: 10px solid red;
-}
-
-.application {
-    background: green;
-}
+@import "./base.scss";
+@import "./card.scss";
