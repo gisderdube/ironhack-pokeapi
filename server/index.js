@@ -43,7 +43,7 @@ app.get('/pokemon', (req, res) => {
                 return true
             })
             .map(el => {
-                return { name: el.ename, picture: el.picture, id: el.id }
+                return { picture: el.picture, id: el.id, name: el.name }
             })
     )
 })
