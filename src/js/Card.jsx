@@ -4,7 +4,7 @@ const Card = props => {
     return (
         <div
             className="card"
-            style={{ borderColor: props.borderColor, borderWidth: 5, borderStyle: 'solid' }}
+            style={{ borderColor: props.borderColor, borderWidth: 15, borderStyle: 'solid' }}
         >
             <img src={props.img} alt="" />
             <h3>{props.heading}</h3>

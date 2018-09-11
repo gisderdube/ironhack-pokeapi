@@ -38,10 +38,13 @@ class Application extends React.Component {
             ],
         }
 
-        console.log(this.state)
-
         this._changePicture = this._changePicture.bind(this)
         this._changeBorder = this._changeBorder.bind(this)
+        this._changeAllBorders = this._changeAllBorders.bind(this)
+    }
+
+    componentDidMount() {
+        setInterval(this._changeAllBorders, 1000)
     }
 
     render() {
@@ -58,7 +61,11 @@ class Application extends React.Component {
             />
         ))
 
-        return <div className="container card-flex">{mappedCards}</div>
+        return (
+            <div className="container">
+                <div className="container card-flex">{mappedCards}</div>
+            </div>
+        )
     }
 
     _changePicture(index) {
@@ -75,6 +82,14 @@ class Application extends React.Component {
             cards: this.state.cards.map((card, i) => {
                 if (i !== index) return card
                 else return { ...card, borderColor: this._generateRandomColor() }
+            }),
+        })
+    }
+
+    _changeAllBorders() {
+        this.setState({
+            cards: this.state.cards.map((card, i) => {
+                return { ...card, borderColor: this._generateRandomColor() }
             }),
         })
     }
