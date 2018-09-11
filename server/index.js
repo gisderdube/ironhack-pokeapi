@@ -10,7 +10,7 @@ const base =
         : 'http://localhost:3000'
 
 const detailedPokemon = pokemon.map(el => {
-    return { ...el, picture: `${base}img/${el.id}${el.ename}.png` }
+    return { ...el, picture: `${base}/img/${el.id}${el.ename}.png` }
 })
 
 const app = express()

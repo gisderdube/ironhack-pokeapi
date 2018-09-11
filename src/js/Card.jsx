@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 
-const Card = props => {
+const Card = ({ pokemon }) => {
+    console.log(pokemon)
     return (
         <div className="card">
-            <h4>Pokemon Card</h4>
+            <img src={pokemon.picture} alt="" />
+            <h4 className="title">{pokemon.name}</h4>
         </div>
     )
 }

@@ -7,23 +7,34 @@ class Application extends React.Component {
         super(props)
 
         this.state = {
+            loading: true,
             pokemon: [],
         }
     }
 
     componentDidMount() {
         axios
-            .get('http://localhost:3000/pokemon/')
+            .get('https://ironhack-pokeapi.herokuapp.com/pokemon')
             .then(result => {
-                console.log(result)
+                this.setState({ pokemon: result.data, loading: false })
             })
             .catch(console.error)
     }
 
     render() {
+        if (this.state.loading) {
+            return (
+                <div className="container">
+                    <h1>Loading...</h1>
+                </div>
+            )
+        }
+
+        const mappedPokemon = this.state.pokemon.map(el => <Card pokemon={el} key={el.id} />)
         return (
             <div className="container">
                 <h1>Pokemon</h1>
+                <div className="poke-flex">{mappedPokemon}</div>
             </div>
         )
     }
