@@ -23,9 +23,15 @@ app.get('/pokemon', (req, res) => {
     const regex = req.query.name ? new RegExp(`.*${req.query.name}.*`, 'i') : /.*/
 
     res.send(
-        detailedPokemon.filter(el => el.name.match(regex)).map(el => {
-            return { name: el.ename, picture: el.picture, id: el.id }
-        })
+        detailedPokemon
+            .filter(el => {
+                if (!el.name.match(regex)) return false
+                if (req.query.minHp && parseInt(req.query.minHp) > el.base.HP) return false
+                return true
+            })
+            .map(el => {
+                return { name: el.ename, picture: el.picture, id: el.id }
+            })
     )
 })
 

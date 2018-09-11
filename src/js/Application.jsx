@@ -10,7 +10,10 @@ class Application extends React.Component {
         this.state = {
             loading: true,
             pokemon: [],
-            search: '',
+            search: {
+                name: '',
+                minHp: '',
+            },
         }
 
         this._catchPokemon = this._catchPokemon.bind(this)
@@ -55,7 +58,11 @@ class Application extends React.Component {
     _searchPokemon(event) {
         event.preventDefault()
         axios
-            .get(`https://ironhack-pokeapi.herokuapp.com/pokemon?name=${this.state.search}`)
+            .get(
+                `https://ironhack-pokeapi.herokuapp.com/pokemon?name=${this.state.search.name}&minHp=${
+                    this.state.search.minHp
+                }`
+            )
             .then(({ data }) => {
                 this.setState({
                     pokemon: data,
@@ -63,9 +70,13 @@ class Application extends React.Component {
             })
     }
 
-    _handleSearchChange(event) {
+    _handleSearchChange(key, value) {
+        const newSearch = { ...this.state.search }
+
+        newSearch[key] = value
+
         this.setState({
-            search: event.target.value,
+            search: newSearch,
         })
     }
 
