@@ -1,11 +1,15 @@
-# W7D2
+# Ironhack PokeAPI
 
--   Lists, mapping, keys
--   props
-
-## Instructions 11.25
-
-1. Add a border with a nice color for each card (either "react inline style" or by "className") (this should probably stored in the card array in the application state)
-2. add another button in the card
-3. when you click that button, change the border color of that card (create a random color)
-4. add a global button that changes the color for all cards
+-   you can access all pokemons at `https://ironhack-pokeapi.herokuapp.com/pokemon`
+-   you can access detailed information about a pokemon at `https://ironhack-pokeapi.herokuapp.com/pokemon/:id`
+-   You can pass the following query properties:
+    -   `name`: will return all pokemon that have that string occuring somewhere in their name, case insensitive
+    -   `minHp`
+    -   `maxHp`
+    -   `minAttack`
+    -   `maxAttack`
+    -   `minDefense`
+    -   `speed`
+    ```
+        curl https://ironhack-pokeapi.herokuapp.com/pokemon?name=chu&minAttack=60
+    ```
