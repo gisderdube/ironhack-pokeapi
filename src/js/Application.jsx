@@ -1,108 +1,38 @@
 import React from 'react'
-import Card from './Card'
+import moment from 'moment'
 
 class Application extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            cards: [
-                {
-                    img: 'https://picsum.photos/300/300',
-                    heading: 'Declarative',
-                    caption:
-                        'Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
-                    borderColor: this._generateRandomColor(),
-                },
-                {
-                    img: 'https://picsum.photos/400/400',
-                    heading: 'Components',
-                    caption:
-                        'Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
-                    borderColor: this._generateRandomColor(),
-                },
-                {
-                    img: 'https://picsum.photos/500/500',
-                    heading: 'Single-Way',
-                    caption:
-                        'Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
-                    borderColor: this._generateRandomColor(),
-                },
-                {
-                    img: 'https://picsum.photos/600/600',
-                    heading: 'JSX',
-                    caption:
-                        'Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
-                    borderColor: this._generateRandomColor(),
-                },
-            ],
+            currentTime: moment(),
         }
 
-        this._changePicture = this._changePicture.bind(this)
-        this._changeBorder = this._changeBorder.bind(this)
-        this._changeAllBorders = this._changeAllBorders.bind(this)
+        this._updateTime = this._updateTime.bind(this)
     }
 
     componentDidMount() {
-        setInterval(this._changeAllBorders, 1000)
+        this.timeInterval = setInterval(this._updateTime, 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timeInterval)
     }
 
     render() {
-        const mappedCards = this.state.cards.map((card, index) => (
-            <Card
-                img={card.img}
-                heading={card.heading}
-                caption={card.caption}
-                borderColor={card.borderColor}
-                index={index}
-                key={index}
-                changePicture={this._changePicture}
-                changeBorder={this._changeBorder}
-            />
-        ))
-
         return (
             <div className="container">
-                <div className="container card-flex">{mappedCards}</div>
+                <h1>Simple State update with react</h1>
+                <h3>Current Time: {this.state.currentTime.format('DD.MM.YYYY HH:mm:ss')}</h3>
             </div>
         )
     }
 
-    _changePicture(index) {
+    _updateTime() {
         this.setState({
-            cards: this.state.cards.map((card, i) => {
-                if (i !== index) return card
-                else return { ...card, img: 'https://picsum.photos/700/700' }
-            }),
+            currentTime: moment(),
         })
-    }
-
-    _changeBorder(index) {
-        this.setState({
-            cards: this.state.cards.map((card, i) => {
-                if (i !== index) return card
-                else return { ...card, borderColor: this._generateRandomColor() }
-            }),
-        })
-    }
-
-    _changeAllBorders() {
-        this.setState({
-            cards: this.state.cards.map((card, i) => {
-                return { ...card, borderColor: this._generateRandomColor() }
-            }),
-        })
-    }
-
-    _generateRandomColor() {
-        return `#${this._generateRandomInt(0, 255).toString(16)}${this._generateRandomInt(
-            0,
-            255
-        ).toString(16)}${this._generateRandomInt(0, 255).toString(16)}`
-    }
-
-    _generateRandomInt(min, max) {
-        return Math.floor(Math.random() * Math.floor(max - min)) + min
     }
 }
 
